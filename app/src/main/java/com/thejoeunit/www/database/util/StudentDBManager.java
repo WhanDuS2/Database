@@ -12,14 +12,23 @@ public class StudentDBManager {
 //    데이터베이스도 하나의 파일 ( excel : --.xlsx )
 
     static final String DB_STUDENT = "student.db";
-//    학생 정보가 저장되는 표, Table( excel : Sheet )
+    //    학생 정보가 저장되는 표, Table( excel : Sheet )
     static final String TABLE_STUDENT = " Students";
     static final int DB_VERSION = 1;
 
     Context mContext;
 
-    private static StudentDBManager mDbManager =  null;
+    private static StudentDBManager mDbManager = null;
     private SQLiteDatabase mDB = null;
+
+    public static StudentDBManager getInstance(Context context) {
+
+        if (mDbManager == null) {
+            mDbManager = new StudentDBManager(context);
+        }
+        return mDbManager;
+    }
+
 
     private StudentDBManager(Context context) {
         mContext = context;
@@ -27,13 +36,13 @@ public class StudentDBManager {
         mDB = mContext.openOrCreateDatabase(DB_STUDENT, Context.MODE_PRIVATE, null);
 
         mDB.execSQL("CREATE TABLE IF NOT EXISTS " + TABLE_STUDENT +
-        "(" +
-        "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
-        "stdNum TEXT, " +
-        "name TEXT, " +
-        "department TEXT, " +
-        "grade INTEGER" +
-        ");");
+                "(" +
+                "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                "stdNum TEXT, " +
+                "name TEXT, " +
+                "department TEXT, " +
+                "grade INTEGER" +
+                ");");
 
     }
 
