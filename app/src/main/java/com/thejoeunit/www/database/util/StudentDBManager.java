@@ -1,5 +1,6 @@
 package com.thejoeunit.www.database.util;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 
@@ -55,4 +56,7 @@ public class StudentDBManager {
 
     }
 
+    public long insert(ContentValues addRowValue){
+        return mDB.insert(TABLE_STUDENT, null, addRowValue);
+    }
 }
